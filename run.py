@@ -16,6 +16,9 @@ SHEET = GSPREAD_CLIENT.open('player_stats')
 def get_goals_data():
     """
     Get goals figures input from the user.
+    Run a while loop to collect a valid string of data from the user
+    via the terminal, which must be a string of 8 numbers separated
+    by commas. The loop will repeatedly request data, until it is valid.
     """
 
     while True:
@@ -54,4 +57,16 @@ def validate_data(values):
     return True
 
 
+def update_goals_worksheet(data):
+    """
+    Update goals worksheet, add new row with the list data provided
+    """
+    print("Updating goals worksheet...\n")
+    goals_worksheet = SHEET.worksheet("goals")
+    goals_worksheet.append_row(data)
+    print("Goals worksheet updated successfully.\n")
+
+
 data = get_goals_data()
+goals_data = [int(num) for num in data]
+update_goals_worksheet(goals_data)
