@@ -86,6 +86,21 @@ def goal_involvement(goals_row):
     
     return goal_involvement_data
 
+def get_last_5_entries_goals():
+    """
+    Collects columns of data from goals worksheet, collecting
+    the last 5 entries for each player and returns the data
+    as a list of lists.
+    """
+    goals = SHEET.worksheet("sales")
+
+    columns = []
+    for ind in range(1, 7):
+        column = goals.col_values(ind)
+        columns.append(column[-5:])
+
+    return columns
+
 
 
 def main():
@@ -101,4 +116,6 @@ def main():
 
 
 print("Welcome to PlayerStats Data Automation")
-main()
+#main()
+
+goals_columns = get_last_5_entries_goals() 
