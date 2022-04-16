@@ -75,7 +75,12 @@ def goal_involvement(goals_row):
     print("Calculating goal_involvement data...\n")
     assists = SHEET.worksheet("assists").get_all_values()
     assists_row = assists[-1]
-    print(assists_row)
+    goal_involvement_data = []
+    for goals, assists in zip(goals_row, assists_row):
+        involvement = int(goals) + assists
+        goal_involvement_data.append(involvement)
+    
+    return goal_involvement_data
 
 
 
@@ -86,7 +91,8 @@ def main():
     data = get_goals_data()
     goals_data = [int(num) for num in data]
     update_goals_worksheet(goals_data)
-    goal_involvement(goals_data)
+    new_involvement_data = goal_involvement(goals_data)
+    print(new_involvement_data)
 
 
 
