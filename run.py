@@ -12,8 +12,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('player_stats')
 
-goals = SHEET.worksheet('goals')
 
-data = goals.get_all_values()
+def get_goals_data():
+    """
+    Get goals figures input from the user.
+    """
+    print("Please enter goals data from the last season.")
+    print("Data should be eight numbers, separated by commas.")
+    print("Example: 10,20,30,40,50,60,25,30\n")
 
-print(data)
+    data_str = input("Enter your data here: ")
+    print(f"The data provided is {data_str}")
+
+
+get_goals_data()
