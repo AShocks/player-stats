@@ -1,6 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -27,7 +27,7 @@ def get_goals_data():
         print("Data should be eight numbers, separated by commas.")
         print("Example: 10,20,30,40,50,60,20,10\n")
 
-        data_str = input("Enter your data here: ")
+        data_str = input("Enter your data here:\n")
 
         goals_data = data_str.split(",")
 
