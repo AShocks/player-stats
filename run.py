@@ -17,13 +17,21 @@ def get_goals_data():
     """
     Get goals figures input from the user.
     """
-    print("Please enter goals data from the last season.")
-    print("Data should be eight numbers, separated by commas.")
-    print("Example: 10,20,30,40,50,60,25,30\n")
 
-    data_str = input("Enter your data here: ")
-    goals_data = data_str.split(",")
-    validate_data(goals_data)
+    while True:
+        print("Please enter goals data from the last season.")
+        print("Data should be eight numbers, separated by commas.")
+        print("Example: 10,20,30,40,50,60,20,10\n")
+
+        data_str = input("Enter your data here: ")
+
+        goals_data = data_str.split(",")
+
+        if validate_data(goals_data):
+            print("Data is valid!")
+            break
+
+    return goals_data
 
 
 
@@ -41,6 +49,9 @@ def validate_data(values):
             )
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
 
 
-get_goals_data()
+data = get_goals_data()
