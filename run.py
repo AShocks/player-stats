@@ -81,7 +81,7 @@ def goal_involvement(goals_row):
     assists_row = assists[-1]
     goal_involvement_data = []
     for goals, assists in zip(goals_row, assists_row):
-        involvement = goals + int(assists)
+        involvement = int(goals) + assists
         goal_involvement_data.append(involvement)
     
     return goal_involvement_data
@@ -92,14 +92,29 @@ def get_last_5_entries_goals():
     the last 5 entries for each player and returns the data
     as a list of lists.
     """
-    goals = SHEET.worksheet("sales")
+    goals = SHEET.worksheet("goals")
 
     columns = []
-    for ind in range(1, 7):
+    for ind in range(1, 9):
         column = goals.col_values(ind)
         columns.append(column[-5:])
 
     return columns
+
+def calculate_goals_data(data):
+    """
+    Calculate the average goals scored for each player
+    """
+    print("Calculating goals data...\n")
+    new_goals_data = []
+
+    for column in data:
+        int_column = [int(num) for num in column]
+        average = sum(int_column) / len(int_column)
+        stock_num = average
+        new_goals_data.append(round(stock_num))
+
+    return new_goals_data
 
 
 
@@ -110,12 +125,13 @@ def main():
     data = get_goals_data()
     goals_data = [int(num) for num in data]
     update_worksheet(goals_data, "goals")
-    new_involvement_data = goal_involvement(goals_data)
-    update_worksheet(new_involvement_data, "goal_involvement")
+    goals_columns = get_last_5_entries_goals()
+    assists_data = calculate_goals_data(goals_columns)
+    update_worksheet(assists_data, "assists")
+    print(assists_data)
 
 
 
 print("Welcome to PlayerStats Data Automation")
-#main()
+main()
 
-goals_columns = get_last_5_entries_goals() 
