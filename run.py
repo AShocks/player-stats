@@ -58,14 +58,18 @@ def validate_data(values):
     return True
 
 
-def update_goals_worksheet(data):
+
+
+
+def update_worksheet(data, worksheet):
     """
-    Update goals worksheet, add new row with the list data provided
+    Receives a list of integers to be inserted into a worksheet
+    Update the relevant worksheet with the data provided
     """
-    print("Updating goals worksheet...\n")
-    goals_worksheet = SHEET.worksheet("goals")
-    goals_worksheet.append_row(data)
-    print("Goals worksheet updated successfully.\n")
+    print(f"Updating {worksheet} worksheet...\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+    print(f"{worksheet} worksheet updated successfully\n")
 
 
 def goal_involvement(goals_row):
@@ -77,7 +81,7 @@ def goal_involvement(goals_row):
     assists_row = assists[-1]
     goal_involvement_data = []
     for goals, assists in zip(goals_row, assists_row):
-        involvement = int(goals) + assists
+        involvement = goals + int(assists)
         goal_involvement_data.append(involvement)
     
     return goal_involvement_data
@@ -90,9 +94,9 @@ def main():
     """
     data = get_goals_data()
     goals_data = [int(num) for num in data]
-    update_goals_worksheet(goals_data)
+    update_worksheet(goals_data, "goals")
     new_involvement_data = goal_involvement(goals_data)
-    print(new_involvement_data)
+    update_worksheet(new_involvement_data, "goal_involvement")
 
 
 
