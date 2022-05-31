@@ -38,7 +38,6 @@ def get_goals_data():
     return goals_data
 
 
-
 def validate_data(values):
     """
     Inside the try, converts all string values into integers.
@@ -56,9 +55,6 @@ def validate_data(values):
         return False
 
     return True
-
-
-
 
 
 def update_worksheet(data, worksheet):
@@ -86,6 +82,7 @@ def goal_involvement(goals_row):
     
     return goal_involvement_data
 
+
 def get_last_5_entries_goals():
     """
     Collects columns of data from goals worksheet, collecting
@@ -101,6 +98,7 @@ def get_last_5_entries_goals():
 
     return columns
 
+
 def calculate_goals_data(data):
     """
     Calculate the average goals scored for each player
@@ -111,11 +109,10 @@ def calculate_goals_data(data):
     for column in data:
         int_column = [int(num) for num in column]
         average = sum(int_column) / len(int_column)
-        stock_num = average
-        new_goals_data.append(round(stock_num))
+        goals_num = average
+        new_goals_data.append(round(goals_num))
 
     return new_goals_data
-
 
 
 def main():
@@ -129,7 +126,6 @@ def main():
     assists_data = calculate_goals_data(goals_columns)
     update_worksheet(assists_data, "assists")
     print(assists_data)
-
 
 
 print("Welcome to PlayerStats Data Automation")
