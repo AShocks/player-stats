@@ -79,7 +79,7 @@ def goal_involvement(goals_row):
     for goals, assists in zip(goals_row, assists_row):
         involvement = int(goals) + assists
         goal_involvement_data.append(involvement)
-    
+
     return goal_involvement_data
 
 
@@ -130,4 +130,3 @@ def main():
 
 print("Welcome to PlayerStats Data Automation")
 main()
-
